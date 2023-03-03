@@ -1,0 +1,5 @@
+# Use the default network olog_default.
+version: "3.7"
+services:
+  test:
+    build: .
