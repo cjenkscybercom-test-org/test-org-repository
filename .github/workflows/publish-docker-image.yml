@@ -14,7 +14,7 @@ jobs:
         id: tag-info
         run: ./scripts/write-tag-info.sh && ./scripts/set-github-env.sh
       - name: Print Tag Info
-        run: echo "Will build docker image for ${{ steps.tag-info.outputs.IMAGE_TAG_LATEST }} and ${{ steps.tag-info.outputs.IMAGE_TAG_TIMESTAMP }}"
+        run: echo "Will build docker image for ${{ steps.tag-info.outputs.IMAGE_TAG_ORG_LATEST }}, ${{ steps.tag-info.outputs.IMAGE_TAG_ORG_TIMESTAMP }}, ${{ steps.tag-info.outputs.IMAGE_TAG_REPO_LATEST }}, ${{ steps.tag-info.outputs.IMAGE_TAG_REPO_TIMESTAMP }}"
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -25,5 +25,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          tags: ${{ steps.tag-info.outputs.IMAGE_TAG_LATEST }},${{ steps.tag-info.outputs.IMAGE_TAG_TIMESTAMP }}
+          tags: ${{ steps.tag-info.outputs.IMAGE_TAG_ORG_LATEST }},${{ steps.tag-info.outputs.IMAGE_TAG_ORG_TIMESTAMP }},${{ steps.tag-info.outputs.IMAGE_TAG_REPO_LATEST }},${{ steps.tag-info.outputs.IMAGE_TAG_REPO_TIMESTAMP }}
           push: true
